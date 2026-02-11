@@ -5,25 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Giselle Madison ❤️</title>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ff4da6">
-
 <style>
 body{
 margin:0;
 padding:0;
 font-family:'Segoe UI',sans-serif;
-background: linear-gradient(to bottom,#0f0c29,#302b63,#24243e);
+background: linear-gradient(to bottom,#1a0026,#330033,#660066);
 color:white;
 text-align:center;
-overflow:hidden;
-}
-
-canvas{
-position:fixed;
-top:0;
-left:0;
-pointer-events:none;
+overflow-x:hidden;
 }
 
 #bloqueo{
@@ -61,63 +51,28 @@ button:hover{
 background:#ff1a8c;
 }
 
-h1{
-margin-top:70px;
-color:#ff80bf;
-}
-
 img{
-width:250px;
+width:280px;
 border-radius:20px;
 margin:15px;
 box-shadow:0 0 25px #ff4da6;
+transition:0.3s;
+}
+
+img:hover{
+transform:scale(1.05);
 }
 
 #carta, #pregunta{
 display:none;
 margin:20px;
+font-size:18px;
 }
 
-#celebracion{
-display:none;
-position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-background:rgba(0,0,0,0.95);
-flex-direction:column;
-justify-content:center;
-align-items:center;
-font-size:35px;
-color:#ff66cc;
-z-index:20;
-}
-
-.heart{
-position:fixed;
-top:-10px;
-animation:fall 4s linear forwards;
-}
-
-@keyframes fall{
-to{transform:translateY(100vh);}
-}
-
-@keyframes caer{
-0%{top:-150px;}
-100%{top:45%;}
-}
-
-.brillo{
-text-shadow:0 0 20px #ff4da6, 0 0 40px #ff4da6, 0 0 60px #ff1a8c;
-}
 </style>
 </head>
 
 <body>
-
-<canvas id="fireworks"></canvas>
 
 <div id="bloqueo">
 <h2>💖 Solo para Giselle Madison 💖</h2>
@@ -133,12 +88,21 @@ text-shadow:0 0 20px #ff4da6, 0 0 40px #ff4da6, 0 0 60px #ff1a8c;
 <h3 id="contador"></h3>
 
 <p>
-El 5 de mayo del 2025 fue nuestro primer beso 💋  
-Y el 7 de mayo del 2025 comenzó oficialmente la historia más hermosa de mi vida… contigo.
+Nuestro primer beso fue el 5 de mayo del 2025 💋  
+Y el 7 de mayo del 2025 comenzó oficialmente nuestra historia ❤️
 </p>
 
+<!-- FOTOS ACTUALIZADAS -->
 <img src="miamor1.jpg">
 <img src="miamor2.jpg">
+
+<!-- BOTÓN PARA ACTIVAR MÚSICA -->
+<button onclick="activarMusica()">🎵 Activar nuestra canción</button>
+
+<audio id="musica" loop>
+<source src="cancion.mp3" type="audio/mpeg">
+Tu navegador no soporta audio.
+</audio>
 
 <button onclick="mostrarCarta()">Abrir mi carta 💌</button>
 
@@ -155,20 +119,9 @@ Eres mi hogar, mi paz y mi destino. ❤️
 <button onclick="celebrar()">Sí 💖</button>
 </p>
 
-<audio id="musica" autoplay loop>
-<source src="cancion.mp3" type="audio/mpeg">
-</audio>
-
 </div>
 
-<div id="celebracion"></div>
-
 <script>
-
-// SERVICE WORKER
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
 
 // CONTRASEÑA
 function verificar(){
@@ -181,7 +134,13 @@ document.getElementById("error").innerHTML="Código incorrecto 💔";
 }
 }
 
-// CONTADOR
+// ACTIVAR MÚSICA
+function activarMusica(){
+let musica=document.getElementById("musica");
+musica.play();
+}
+
+// CONTADOR DESDE 7 MAYO 2025
 let inicio=new Date("May 7, 2025 00:00:00").getTime();
 setInterval(function(){
 let ahora=new Date().getTime();
@@ -199,110 +158,8 @@ function mostrarPregunta(){
 document.getElementById("pregunta").style.display="block";
 }
 
-// CELEBRACIÓN FINAL
 function celebrar(){
-
-if (navigator.vibrate) {
-navigator.vibrate([400,200,400,200,800]);
-}
-
-let musica=document.getElementById("musica");
-if(musica){
-musica.volume=0.2;
-setTimeout(()=>{musica.volume=1;},5000);
-}
-
-let celebracion=document.getElementById("celebracion");
-celebracion.style.display="flex";
-celebracion.style.display="flex";
-
-// Nombre gigante
-let nombre=document.createElement("h1");
-nombre.innerHTML="GISELLE MADISON 💖";
-nombre.classList.add("brillo");
-nombre.style.fontSize="50px";
-celebracion.appendChild(nombre);
-
-// Anillo cayendo
-let anillo=document.createElement("div");
-anillo.innerHTML="💍";
-anillo.style.position="absolute";
-anillo.style.fontSize="90px";
-anillo.style.animation="caer 2s ease-out forwards";
-celebracion.appendChild(anillo);
-
-// Lluvia corazones
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(Math.random()*40+20)+"px";
-document.body.appendChild(heart);
-setTimeout(()=>{heart.remove();},4000);
-},120);
-
-// Fuegos artificiales
-iniciarFuegos();
-
-// MENSAJE FINAL después de 10 segundos
-setTimeout(()=>{
-let final=document.createElement("h2");
-final.innerHTML="Gracias por aceptar vivir esta historia conmigo ❤️";
-final.classList.add("brillo");
-celebracion.appendChild(final);
-},10000);
-}
-
-// FUEGOS ARTIFICIALES
-function iniciarFuegos(){
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let particles=[];
-
-function crearExplosion(){
-let x=Math.random()*canvas.width;
-let y=Math.random()*canvas.height;
-for(let i=0;i<60;i++){
-particles.push({
-x:x,
-y:y,
-radius:2,
-color:"hsl("+Math.random()*360+",100%,50%)",
-speedX:(Math.random()-0.5)*6,
-speedY:(Math.random()-0.5)*6,
-life:100
-});
-}
-}
-
-function animar(){
-ctx.fillStyle="rgba(0,0,0,0.2)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-particles.forEach((p,index)=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
-ctx.fillStyle=p.color;
-ctx.fill();
-
-p.x+=p.speedX;
-p.y+=p.speedY;
-p.life--;
-
-if(p.life<=0){
-particles.splice(index,1);
-}
-});
-
-requestAnimationFrame(animar);
-}
-
-setInterval(crearExplosion,800);
-animar();
+alert("Ahora somos para siempre 💖");
 }
 
 </script>
