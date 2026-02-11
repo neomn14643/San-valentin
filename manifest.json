@@ -1,0 +1,16 @@
+{
+  "name": "Giselle Madison ❤️",
+  "short_name": "Para Siempre 💖",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0c29",
+  "theme_color": "#ff4da6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icono.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
