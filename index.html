@@ -8,32 +8,41 @@
 <style>
 body{
 margin:0;
-padding:0;
 font-family:'Segoe UI',sans-serif;
-background: linear-gradient(to bottom,#1a0026,#330033,#660066);
-color:white;
-text-align:center;
-overflow-x:hidden;
+overflow:hidden;
+scroll-behavior:smooth;
 }
 
-#bloqueo{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
+.container{
+height:100vh;
+overflow-y:scroll;
+scroll-snap-type:y mandatory;
+}
+
+.section{
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-z-index:10;
+text-align:center;
+padding:30px;
+box-sizing:border-box;
+scroll-snap-align:start;
+color:white;
 }
 
-input{
-padding:12px;
-font-size:18px;
-border-radius:10px;
-border:none;
-text-align:center;
+/* Fondos diferentes por sección */
+#s1{background:linear-gradient(to bottom,#000000,#1a0026);}
+#s2{background:linear-gradient(to bottom,#330033,#660066);}
+#s3{background:linear-gradient(to bottom,#660066,#990099);}
+#s4{background:linear-gradient(to bottom,#990099,#cc00cc);}
+
+img{
+width:280px;
+border-radius:20px;
+margin:15px;
+box-shadow:0 0 25px #ff4da6;
 }
 
 button{
@@ -51,22 +60,16 @@ button:hover{
 background:#ff1a8c;
 }
 
-img{
-width:280px;
-border-radius:20px;
-margin:15px;
-box-shadow:0 0 25px #ff4da6;
-transition:0.3s;
-}
-
-img:hover{
-transform:scale(1.05);
-}
-
-#carta, #pregunta{
-display:none;
-margin:20px;
+input{
+padding:12px;
 font-size:18px;
+border-radius:10px;
+border:none;
+text-align:center;
+}
+
+h1{
+font-size:32px;
 }
 
 </style>
@@ -74,7 +77,10 @@ font-size:18px;
 
 <body>
 
-<div id="bloqueo">
+<div class="container">
+
+<!-- SECCIÓN 1 BLOQUEO -->
+<div class="section" id="s1">
 <h2>💖 Solo para Giselle Madison 💖</h2>
 <p>Ingresa nuestro código secreto 🔐</p>
 <input type="password" id="clave" placeholder="Código">
@@ -82,65 +88,53 @@ font-size:18px;
 <p id="error" style="color:red;"></p>
 </div>
 
-<div id="contenido" style="display:none;">
-
+<!-- SECCIÓN 2 MENSAJE -->
+<div class="section" id="s2">
 <h1>Giselle Madison 💘</h1>
 <h3 id="contador"></h3>
-
 <p>
 Nuestro primer beso fue el 5 de mayo del 2025 💋  
 Y el 7 de mayo del 2025 comenzó oficialmente nuestra historia ❤️
 </p>
+</div>
 
-<!-- FOTOS ACTUALIZADAS -->
+<!-- SECCIÓN 3 FOTOS -->
+<div class="section" id="s3">
 <img src="miamor1.jpg">
 <img src="miamor2.jpg">
-
-<!-- BOTÓN PARA ACTIVAR MÚSICA -->
 <button onclick="activarMusica()">🎵 Activar nuestra canción</button>
 
 <audio id="musica" loop>
 <source src="cancion.mp3" type="audio/mpeg">
-Tu navegador no soporta audio.
 </audio>
+</div>
 
-<button onclick="mostrarCarta()">Abrir mi carta 💌</button>
-
-<p id="carta">
-Te elegiría en cada vida, en cada universo.  
-Eres mi hogar, mi paz y mi destino. ❤️
-</p>
-
-<button onclick="mostrarPregunta()">Continuar 💞</button>
-
-<p id="pregunta">
-💍 ¿Puedo ser tu para siempre?
-<br><br>
+<!-- SECCIÓN 4 PREGUNTA -->
+<div class="section" id="s4">
+<h2>💍 ¿Puedo ser tu para siempre?</h2>
 <button onclick="celebrar()">Sí 💖</button>
-</p>
+</div>
 
 </div>
 
 <script>
 
-// CONTRASEÑA
 function verificar(){
 let clave=document.getElementById("clave").value;
 if(clave==="14643"){
-document.getElementById("bloqueo").style.display="none";
-document.getElementById("contenido").style.display="block";
+document.querySelector(".container").scrollTo({
+top:window.innerHeight,
+behavior:"smooth"
+});
 }else{
 document.getElementById("error").innerHTML="Código incorrecto 💔";
 }
 }
 
-// ACTIVAR MÚSICA
 function activarMusica(){
-let musica=document.getElementById("musica");
-musica.play();
+document.getElementById("musica").play();
 }
 
-// CONTADOR DESDE 7 MAYO 2025
 let inicio=new Date("May 7, 2025 00:00:00").getTime();
 setInterval(function(){
 let ahora=new Date().getTime();
@@ -150,16 +144,8 @@ document.getElementById("contador").innerHTML=
 "Llevamos juntos "+dias+" días 💖";
 },1000);
 
-function mostrarCarta(){
-document.getElementById("carta").style.display="block";
-}
-
-function mostrarPregunta(){
-document.getElementById("pregunta").style.display="block";
-}
-
 function celebrar(){
-alert("Ahora somos para siempre 💖");
+alert("Gracias por aceptar vivir esta historia conmigo ❤️");
 }
 
 </script>
