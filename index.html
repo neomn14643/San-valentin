@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[2:34 p.m., 11/2/2026] ~neo: <!DOCTYPE html>
 <html>
 <head>
 <title>Para el amor de mi vida ❤️</title>
@@ -48,6 +48,136 @@ Te amo más de lo que las palabras pueden decir ❤️
 <button onclick="alert('Prometo amarte todos los días de mi vida 💍❤️')">
 Haz clic aquí mi amor
 </button>
+
+</body>
+</html>
+[2:35 p.m., 11/2/2026] ~neo: <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Giselle Madison ❤️</title>
+
+<style>
+body{
+margin:0;
+padding:0;
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(to bottom, #1a001a, #330033);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+h1{
+margin-top:80px;
+font-size:50px;
+color:#ff99cc;
+}
+
+h2{
+font-weight:300;
+}
+
+p{
+width:80%;
+margin:auto;
+font-size:20px;
+line-height:1.6;
+}
+
+img{
+width:300px;
+border-radius:20px;
+margin:20px;
+box-shadow:0 0 20px pink;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+border:none;
+background:#ff4da6;
+color:white;
+border-radius:30px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#ff1a8c;
+}
+
+/* Corazones */
+.heart{
+position:fixed;
+top:-10px;
+color:#ff66b2;
+font-size:20px;
+animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(0);}
+100%{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<h1>Giselle Madison 💖</h1>
+<h2>El amor de mi vida</h2>
+
+<p>
+El 5 de mayo del 2025 fue el día en que nuestros labios se encontraron por primera vez 💋  
+Y el 7 de mayo del 2025 comenzó oficialmente la historia más hermosa de mi vida.  
+Desde entonces, cada día contigo es mi lugar favorito en el mundo.
+</p>
+
+<h2>💞 Llevamos juntos:</h2>
+<h2 id="contador"></h2>
+
+<img src="foto1.jpg">
+<img src="foto2.jpg">
+
+<br>
+
+<button onclick="alert('Prometo elegirte todos los días de mi vida ❤️')">
+Tócame mi amor 💘
+</button>
+
+<!-- Música -->
+<audio autoplay loop>
+  <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// CONTADOR DESDE 7 MAYO 2025
+let inicio = new Date("May 7, 2025 00:00:00").getTime();
+
+setInterval(function(){
+let ahora = new Date().getTime();
+let distancia = ahora - inicio;
+
+let dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+let horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+let minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+
+document.getElementById("contador").innerHTML =
+dias + " días 💖 " + horas + " horas 💞 " + minutos + " minutos";
+},1000);
+
+// CORAZONES
+setInterval(function(){
+let heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+10)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},5000);
+},300);
+</script>
 
 </body>
 </html>
